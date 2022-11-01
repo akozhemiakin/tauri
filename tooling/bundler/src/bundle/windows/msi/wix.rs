@@ -673,6 +673,7 @@ pub fn build_wix_app_installer(
     data.insert("feature_group_refs", to_json(&wix.feature_group_refs));
     data.insert("feature_refs", to_json(&wix.feature_refs));
     data.insert("merge_refs", to_json(&wix.merge_refs));
+    data.insert("autostart", to_json(&wix.autostart));
     fragment_paths = wix.fragment_paths.clone();
     enable_elevated_update_task = wix.enable_elevated_update_task;
 

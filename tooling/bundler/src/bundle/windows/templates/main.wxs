@@ -130,6 +130,14 @@
                 <File Id="UpdateTaskUninstaller" Source="uninstall-task.ps1" KeyPath="yes" Checksum="yes"/>
             </Component>
             {{/if}}
+            {{#if autostart}}
+            <Component Id="AutoStartRegistryEntries" Guid="6B4846B4-C05D-425A-9B24-BDFABDAFE4DF">
+              <RegistryKey Root="HKCU"
+                           Key="Software\Microsoft\Windows\CurrentVersion\Run">
+                  <RegistryValue Name="[ProductName]" Type="string" Value="[INSTALLDIR][ProductName].exe"/>
+              </RegistryKey>
+            </Component>
+            {{/if}}
             {{{resources}}}
             <Component Id="CMP_UninstallShortcut" Guid="*">
 
@@ -205,6 +213,10 @@
                 <ComponentRef Id="CMP_UninstallShortcut" />
                 <ComponentRef Id="ApplicationShortcut" />
                 <ComponentRef Id="ApplicationShortcutDesktop" />
+            </Feature>
+
+            <Feature Id="AutoStartRegistryEntries" Title="Run at OS startup" Level="1">
+              <ComponentRef Id="AutoStartRegistryEntries" />
             </Feature>
 
             <Feature
